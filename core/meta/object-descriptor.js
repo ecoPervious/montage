@@ -407,9 +407,6 @@ var ObjectDescriptor = exports.ObjectDescriptor = Montage.specialize( /** @lends
 
                 
                 if (isReady) {
-                    if (this._name === "OrganizationBookmarkVersion") {
-                        console.log("Version._preparePropertyDescriptorsCache");
-                    }
                     this._propertyDescriptorsAreCached = true;
                     this._propertyDescriptors = [];
                     this._propertyDescriptorsTable.clear();
