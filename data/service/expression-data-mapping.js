@@ -892,6 +892,20 @@ exports.ExpressionDataMapping = DataMapping.specialize(/** @lends ExpressionData
         }
     },
 
+    _areRulesInitialized: {
+        value: false
+    },
+
+    _initializeRules: {
+        value: function () {
+            if (!this._areRulesInitialized) {
+                this._areRulesInitialized = true;
+                this._mapObjectMappingRules(this._rawOwnObjectMappingRules || {});
+                this._mapRawDataMappingRules(this._rawOwnRawDataMappingRules || {});
+            }
+        }
+    },
+
     _rawOwnObjectMappingRules: {
         value: undefined
     },
@@ -900,7 +914,7 @@ exports.ExpressionDataMapping = DataMapping.specialize(/** @lends ExpressionData
         get: function () {
             if (!this.__ownObjectMappingRules) {
                 this.__ownObjectMappingRules = new Map();
-                this._mapObjectMappingRules(this._rawOwnObjectMappingRules || {});
+                this._initializeRules();
             }
             return this.__ownObjectMappingRules;
         }
@@ -927,7 +941,7 @@ exports.ExpressionDataMapping = DataMapping.specialize(/** @lends ExpressionData
         get: function () {
             if (!this.__ownRawDataMappingRules) {
                 this.__ownRawDataMappingRules = new Map();
-                this._mapRawDataMappingRules(this._rawOwnRawDataMappingRules || {});
+                this._initializeRules();
             }
             return this.__ownRawDataMappingRules;
         }
